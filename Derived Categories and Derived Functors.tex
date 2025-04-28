@@ -1,0 +1,194 @@
+\pagebreak
+\section{Derived Categories and Derived Functors}
+\par
+We shall first review some basic definitions in category theory.
+\begin{definition}
+    Let $\cat{C}$ be a category. A category $\cat{D}$ is a \hdef{subcategory} of $\cat{C}$ if the $\Ob(\cat{D})$ and the ${\Hom}_{\cat{D}}(X,Y)$ are subcollections of $\Ob(\cat{C})$ and ${\Hom}_{\cat{C}}(X,Y)$, respectively, for all objects $X$ and $Y$ in $\cat{C}$. The subcatgeory $\cat{D}$ is said to be \hdef{full} if for all objects $X$ and $Y$ in $\cat{D}$, ${\Hom}_{\cat{D}}(X,Y)$ is exactly ${\Hom}_{\cat{C}}(X,Y)$.
+\end{definition}
+\begin{definition}
+    Let $\cft{C}$ be a category. A morphism $f:A\to B$ is a \hdef{monomorphism} if for all $g,h:C\to A$, $f\comp g=g\comp h$ implies $g=h$. A morphism $f:A\to B$ is called an \hdef{epimorphism} if for all $i,j:B\to D$, $i\comp f=j\comp f$ implies $i=j$.
+\end{definition}
+\begin{definition}
+    Let $\cat{C}$ be a category. A morphism $f:X\to Y$ in $\cat{C}$ is a \hdef{constant morphism} if for all object $Z$ and morphisms $g,h:Z\to X$, $fg=fh$. A morphism is a \hdef{zero morphism} if it is both a constant morphism and a coconstant morphism.
+\end{definition}
+\begin{definition}
+    Let $\cat{C}$ be a category. A \hdef{kernel} of a morphism $f:X\to Y$ is a pair $(K,k)$, where $K$ is an object and $k:K\to X$ is a morphism, such that 
+    \begin{enumerate}
+        \item $fk={0}_{KY}$.
+        \item For all $(K',k')$ such that $k'f={0}_{K'Y}$, there exists a unique $u:K'\to K$.
+    \end{enumerate}
+    \begin{center}
+        \begin{tikzcd}
+            && X \\
+            \\
+            && K && Y \\
+            \\
+            {K'}
+            \arrow["f", from=1-3, to=3-5]
+            \arrow["k", from=3-3, to=1-3]
+            \arrow["0"', from=3-3, to=3-5]
+            \arrow["{k'}", from=5-1, to=1-3]
+            \arrow["u", dashed, from=5-1, to=3-3]
+            \arrow["0"', from=5-1, to=3-5]
+        \end{tikzcd}
+    \end{center}
+\end{definition}
+\begin{definition}
+    A category $\cat{C}$ is an \hdef{additive category} if every hom-set of $\cat{C}$ is an abelian group, composition of morphisms is bilinear, and $\cat{C}$ admits finite coproduct.
+\end{definition}
+\begin{definition}
+    A functor $f:\cat{A}\to\cat{B}$ between additive categories is an \hdef{additive functor} if it preserves the finite coproduct.
+\end{definition}
+\begin{definition}
+    Let $\cat{A}$ be an additive category. A \hdef{cochain complex} is a collection ${X}^{*}$ of objects ${X}^{n}$ in $\cat{A}$ with maps ${d}^{n}:{X}^{n}\to{X}^{n+1}$ such that ${d}^{n+1}{d}^{n}=0$. The morphism between complexes ${X}^{*}$ and ${Y}^{*}$ is a collection of maps ${f}^{n}:{X}^{n}\to{Y}^{n}$ such that ${f}^{n+1}{d}_{X}^{n}={d}_{Y}^{n}{f}^{n}$. This defines the category of cochain complexes, denoted $\cat{C(A)}$.
+\end{definition}
+\begin{definition}
+    Let ${X}^{*}$ and ${Y}^{*}$ be cochain complexes. The maps $f,g:{X}^{*}\to{Y}^{*}$ are \hdef{homotopic} if there exists a collection of maps ${k}^{n}:{X}^{n}\to{Y}^{n-1}$ such that ${f}^{n}-{g}^{n}={d}_{Y}^{n-1}{k}^{n}+{k}^{n+1}{d}_{X}^{n}$.
+\end{definition}
+\par
+It is trivial that homotopy is an equivalence relation.
+\begin{definition}
+    Let $\cat{A}$ be an additive category. The objects of the \hdef{homotopy category}, denoted $\cat{K(A)}$, are cochain complexes and the morphisms are homotopic class of morphisms of cochain complexes.
+\end{definition}
+\begin{proposition}
+    Homotopy category is additive.
+\end{proposition}
+\begin{proof}
+    Consider a lemma: $\cat{C(A)}$ is additive. 
+\end{proof}
+\begin{definition}
+    A category $\cat{C}$ is a \hdef{pre-abelian category} if $\cat{C}$ is an additive category and every morphism in $\cat{C}$ has a kernel and a cokernel. A pre-abelian category $\cat{C}$ is an \hdef{abelian category} if every monomorphism is a kernel and every epimorphism is a cokernel.
+\end{definition}
+\begin{definition}
+    A \hdef{triangulated category} is an additive category $\cat{C}$ with:
+    \begin{enumerate}
+        \item a \hdef{translation functor} $T:\cat{C}\to\cat{C}$ that is fully-faithful,
+        \item a collection of \hdef{triangles} $(X,Y,Z,u,v,w)$, where $X$, $Y$, and $Z$ are objects of $\cat{C}$ and $u:X\to Y$, $v:Y\to Z$, and $w:Z\to T(X)$ are morphisms,
+        \item morphisms $(f,g,h):(X,Y,Z,u,v,w)\to(X',Y',Z',u',v',w')$ such that the following diagram commutes.
+    \end{enumerate}
+    \begin{center}
+        \begin{tikzcd}
+            X && Y && Z && {T(X)} \\
+            \\
+            {X'} && {Y'} && {Z'} && {T(X')}
+            \arrow["u", from=1-1, to=1-3]
+            \arrow["f"', from=1-1, to=3-1]
+            \arrow["v", from=1-3, to=1-5]
+            \arrow["g"', from=1-3, to=3-3]
+            \arrow["w", from=1-5, to=1-7]
+            \arrow["h"', from=1-5, to=3-5]
+            \arrow["{T(f)}"', from=1-7, to=3-7]
+            \arrow["{u'}"', from=3-1, to=3-3]
+            \arrow["{v'}"', from=3-3, to=3-5]
+            \arrow["{w'}"', from=3-5, to=3-7]
+        \end{tikzcd}
+    \end{center}
+    The data subject to the following rules:
+    \begin{enumerate}
+        \item The sextuple $(X,X,0,{\id}_{X},0,0)$ is a triangle and for all $f:A\to B$, there exists a triangle $(A,B,C,f,g,h)$.
+        \item A sextuple $(A,B,C,f,g,h)$ is a triangle if and only if $(B,C,T(A),g,h,-T(f))$ is a triangle.
+        \item Let $(X,Y,Z,u,v,w)$ and $(X',Y',Z',u',v',w')$ be triangles. Let $f:X\to X'$ and $g:Y\to Y'$ be morphisms in $\cat{C}$ that commutes with $u$ and $u'$, then there exists $h:Z\to Z'$ such that $(f,g,h)$ is a morphism between triangles.
+        \begin{center}
+            \begin{tikzcd}
+                X && Y && Z && {T(X)} \\
+                \\
+                {X'} && {Y'} && {Z'} && {T(X')}
+                \arrow["u", from=1-1, to=1-3]
+                \arrow["f"', from=1-1, to=3-1]
+                \arrow[from=1-3, to=1-5]
+                \arrow["g"', from=1-3, to=3-3]
+                \arrow[from=1-5, to=1-7]
+                \arrow["h"', dashed, from=1-5, to=3-5]
+                \arrow["{T(f)}"', from=1-7, to=3-7]
+                \arrow["{u'}"', from=3-1, to=3-3]
+                \arrow[from=3-3, to=3-5]
+                \arrow[from=3-5, to=3-7]
+            \end{tikzcd}
+        \end{center}
+        \item Let $(X,Y,Z',u,j,\ )$, $(Y,Z,X',v,\ ,i)$, and $(X,Z,Y',vu,\ ,\ )$ be triangles, then there exists morphisms $f:Z'\to Y'$ and $g:Y'\to X'$ such that $(Z',Y',X',f,g,T(j)i)$ is a triangle and the following diagram commutes.
+        \begin{center}
+            \begin{tikzcd}
+                {Z'} && {Y'} \\
+                \\
+                X
+                \arrow["f", dashed, from=1-1, to=1-3]
+                \arrow[from=1-1, to=3-1]
+                \arrow[from=1-3, to=3-1]
+            \end{tikzcd}
+            \hspace{2.5cm}
+            \begin{tikzcd}
+                {Y'} && Z \\
+                \\
+                {X'}
+                \arrow["g"', dashed, from=1-1, to=3-1]
+                \arrow[from=1-3, to=1-1]
+                \arrow[from=1-3, to=3-1]
+            \end{tikzcd}
+        \end{center}
+        This is called the \hdef{octohedral axiom}.
+        \begin{center}
+            \begin{tikzcd}
+                && {Y'} \\
+                {Z'} &&&& {X'} \\
+                \\
+                X &&&& Z \\
+                && Y
+                \arrow["g", dashed, from=1-3, to=2-5]
+                \arrow[from=1-3, to=4-1]
+                \arrow["f", dashed, from=2-1, to=1-3]
+                \arrow[from=2-1, to=4-1]
+                \arrow["{T(j)i}", from=2-5, to=2-1]
+                \arrow["i"', from=2-5, to=5-3]
+                \arrow["vu"', from=4-1, to=4-5]
+                \arrow["u"', from=4-1, to=5-3]
+                \arrow[from=4-5, to=1-3]
+                \arrow[from=4-5, to=2-5]
+                \arrow["j"', from=5-3, to=2-1]
+                \arrow["v"', from=5-3, to=4-5]
+            \end{tikzcd}
+        \end{center}
+    \end{enumerate}
+\end{definition}
+\begin{definition}
+    Let $\cat{C}$ and $\cat{D}$ be additive categories. An additive functor $f:\cat{C}\to\cat{D}$ is a \hdef{covariant $\pa$-functor} if it commutes with the translation functor and it preserves triangles. A \hdef{contravariant $\pa$-functor} takes triangles into triangles with the arrows reversed, and sends the translation functor into its inverse.
+\end{definition}
+Now we define the triangulated category over a homotopy category.
+\begin{proposition}
+    Let $T{({X}^{*})}^{p}={X}^{p+1}$ and ${d}_{T(X)}=-{d}_{X}$. Given a morphism $u:{X}^{*}\to{Y}^{*}$, we define ${Z}^{*}$ to be the \hdef{mapping cone} $T({X}^{*})\oplus{Y}^{*}$. The differential maps in ${Z}^{*}$ are matrices $\begin{pmatrix}
+        T({d}_{X}) & T(u) \\
+        0 & {d}_{Y}
+    \end{pmatrix}$. We pick $v:{Y}^{*}\to{Z}^{*}$ and $w:{Z}^{*}\to{X}^{*}$ to be the natural inclusion and projection. A triangle is defined to be a sextuple that induces by a morphism $u:{X}^{*}\to{Y}^{*}$. This defines a triangulated category.
+\end{proposition}
+\begin{proof}
+    (TR1) Take ${\id}_{X}:{X}^{*}\to{X}^{*}$, then ${Z}^{*}=T({X}^{*})\oplus{X}^{*}$ and the differentials are ${d}_{Z}^{n}=\begin{pmatrix}
+        -{d}_{X}^{n} & {\id}_{{X}^{n+1}} \\
+        0 & {d}_{X}^{n}
+    \end{pmatrix}$. Define ${k}^{n}:{Z}^{n}\to{Z}^{n-1}$ by ${k}^{n}((a,b))=(0,a)$. Then ${k}^{n+1}{d}_{Z}^{n}((a,b))={k}^{n+1}((-{d}_{X}^{n}(a)+b,{d}_{X}^{n}(b)))=(0,-{d}_{X}^{n}(a)+b)$ and ${d}_{Z}^{n-1}{k}^{n}((a,b))={d}_{Z}^{n-1}((0,a))=(a,{d}_{X}^{n}(a))$. We have $({k}^{n+1}{d}_{Z}^{n}+{d}_{Z}^{n-1}{k}^{n})((a,b))=(a,b)$, hence ${\id}_{\Z}\sim 0$. The sextuple $(X,X,0,{\id}_{X},0,0)$ is the triangle induced by ${\id}_{X}:{X}^{*}\to{X}^{*}$. $\sq$ (TR2) Let $({X}^{*},{Y}^{*},{Z}^{*},u,v,w)$ be a triangle. Denote $T({Y}^{*})\op{Z}^{*}$ by ${A}^{*}$. Consider the sextuple $({Y}^{*},{Z}^{*},{A}^{*},v,s,t)$, 
+\end{proof}
+\begin{definition}
+    Let $\cat{C}$ be a category and let $S$ be a collection of morphisms in $\cat{C}$, then the \hdef{localization} of $\cat{C}$ with respect to $S$ is a category ${\cat{C}}_{\cat{S}}$ together with a functor $Q:\cat{C}\to{\cat{C}}_{\cat{S}}$ such that 
+    \begin{enumerate}
+        \item $Q(s)$ is an isomorphism for every $s\in S$.
+        \item Any functor $F:\cat{C}\to\cat{D}$ such that $F(s)$ is an isomorphism for all $s\in S$ factors uniquely through $Q$.
+    \end{enumerate}
+\end{definition}
+\begin{center}
+    \begin{tikzcd}
+        {\cat{C}} && {{\cat{C}}_{\cat{S}}} \\
+        \\
+        && {\cat{D}}
+        \arrow["Q", from=1-1, to=1-3]
+        \arrow["F"', from=1-1, to=3-3]
+        \arrow["{\wb{F}}", dashed, from=1-3, to=3-3]
+    \end{tikzcd}
+\end{center}
+\begin{definition}
+    Let $\cat{A}$ be an abelian category. A \hdef{quasi-isomorphism} is a morphism $f:{X}^{*}\to{Y}^{*}$ in $\cat{K(A)}$ which induces an isomorphism on cohomology. The collection of all quasi-isomorphisms is denoted by $\text{Qis}$.
+\end{definition}
+\begin{definition}
+    The \hdef{derived category} $\cat{D(A)}$ of an abelian category $\cat{A}$ is the localization ${\cat{K(A)}}_{\cat{Qis}}$.
+\end{definition}
+We show the definition of a right derived covariant functor and the other definitions can be obtained similarly.
+\begin{definition}
+    Let 
+\end{definition}
