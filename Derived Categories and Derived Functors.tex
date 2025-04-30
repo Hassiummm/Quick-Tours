@@ -1,7 +1,7 @@
 \pagebreak
-\section{Derived Categories and Derived Functors}
+\section{Derived Categories}
 \par
-We shall first review some basic definitions in category theory.
+In this note, we will sketch some proofs but not in detailed.
 \begin{definition}
     Let $\cat{C}$ be a category. A category $\cat{D}$ is a \hdef{subcategory} of $\cat{C}$ if the $\Ob(\cat{D})$ and the ${\Hom}_{\cat{D}}(X,Y)$ are subcollections of $\Ob(\cat{C})$ and ${\Hom}_{\cat{C}}(X,Y)$, respectively, for all objects $X$ and $Y$ in $\cat{C}$. The subcatgeory $\cat{D}$ is said to be \hdef{full} if for all objects $X$ and $Y$ in $\cat{D}$, ${\Hom}_{\cat{D}}(X,Y)$ is exactly ${\Hom}_{\cat{C}}(X,Y)$.
 \end{definition}
@@ -34,10 +34,21 @@ We shall first review some basic definitions in category theory.
     \end{center}
 \end{definition}
 \begin{definition}
+    Let $F$ and $G$ be functors between $\cat{C}$ and $\cat{D}$. A \hdef{natural transformation} $\eta$ from $F$ to $G$ is a family of morphisms such that
+    \begin{enumerate}
+        \item For all object $X$ in $\cat{C}$, there exists a morphism ${\eta}_{X}:F(X)\to G(X)$, called the \hdef{component} at $X$.
+        \item For all $f:X\to Y$, ${\eta}_{Y}\comp F(f)=G(f)\comp{\eta}_{X}$.
+    \end{enumerate}
+    A functor $F:\cat{C}\to\cat{D}$ is a \hdef{natural functor} if for all $G:\cat{C}\to\cat{D}$, there exists a natueal transformation $\eta$.
+\end{definition}
+\begin{definition}
     A category $\cat{C}$ is an \hdef{additive category} if every hom-set of $\cat{C}$ is an abelian group, composition of morphisms is bilinear, and $\cat{C}$ admits finite coproduct.
 \end{definition}
 \begin{definition}
     A functor $f:\cat{A}\to\cat{B}$ between additive categories is an \hdef{additive functor} if it preserves the finite coproduct.
+\end{definition}
+\begin{definition}
+    A category $\cat{C}$ is a \hdef{pre-abelian category} if $\cat{C}$ is an additive category and every morphism in $\cat{C}$ has a kernel and a cokernel. A pre-abelian category $\cat{C}$ is an \hdef{abelian category} if every monomorphism is a kernel and every epimorphism is a cokernel.
 \end{definition}
 \begin{definition}
     Let $\cat{A}$ be an additive category. A \hdef{cochain complex} is a collection ${X}^{*}$ of objects ${X}^{n}$ in $\cat{A}$ with maps ${d}^{n}:{X}^{n}\to{X}^{n+1}$ such that ${d}^{n+1}{d}^{n}=0$. The morphism between complexes ${X}^{*}$ and ${Y}^{*}$ is a collection of maps ${f}^{n}:{X}^{n}\to{Y}^{n}$ such that ${f}^{n+1}{d}_{X}^{n}={d}_{Y}^{n}{f}^{n}$. This defines the category of cochain complexes, denoted $\cat{C(A)}$.
@@ -50,19 +61,12 @@ It is trivial that homotopy is an equivalence relation.
 \begin{definition}
     Let $\cat{A}$ be an additive category. The objects of the \hdef{homotopy category}, denoted $\cat{K(A)}$, are cochain complexes and the morphisms are homotopic class of morphisms of cochain complexes.
 \end{definition}
-\begin{proposition}
-    Homotopy category is additive.
-\end{proposition}
-\begin{proof}
-    Consider a lemma: $\cat{C(A)}$ is additive. 
-\end{proof}
-\begin{definition}
-    A category $\cat{C}$ is a \hdef{pre-abelian category} if $\cat{C}$ is an additive category and every morphism in $\cat{C}$ has a kernel and a cokernel. A pre-abelian category $\cat{C}$ is an \hdef{abelian category} if every monomorphism is a kernel and every epimorphism is a cokernel.
-\end{definition}
+\par
+Let $\cat{A}$ be an additive category and $\cat{K(A)}$ be the homotopy category. Define the finite coproduct to be the direct sum ${({X}^{*}\op{Y}^{*})}^{n}={X}^{n}\op{Y}^{n}$. Define the composition to be pairwise addition. Since composition in $\cat{A}$ is bilinear, it is bilinear in $\cat{K(A)}$. It is not hard to check that $\cat{K(A)}$ is additive.
 \begin{definition}
     A \hdef{triangulated category} is an additive category $\cat{C}$ with:
     \begin{enumerate}
-        \item a \hdef{translation functor} $T:\cat{C}\to\cat{C}$ that is fully-faithful,
+        \item an additive automorphism $T:\cat{C}\to\cat{C}$ called the \hdef{translation functor},
         \item a collection of \hdef{triangles} $(X,Y,Z,u,v,w)$, where $X$, $Y$, and $Z$ are objects of $\cat{C}$ and $u:X\to Y$, $v:Y\to Z$, and $w:Z\to T(X)$ are morphisms,
         \item morphisms $(f,g,h):(X,Y,Z,u,v,w)\to(X',Y',Z',u',v',w')$ such that the following diagram commutes.
     \end{enumerate}
@@ -153,7 +157,7 @@ It is trivial that homotopy is an equivalence relation.
     Let $\cat{C}$ and $\cat{D}$ be additive categories. An additive functor $f:\cat{C}\to\cat{D}$ is a \hdef{covariant $\pa$-functor} if it commutes with the translation functor and it preserves triangles. A \hdef{contravariant $\pa$-functor} takes triangles into triangles with the arrows reversed, and sends the translation functor into its inverse.
 \end{definition}
 \par
-Homotopy category can be triangulated.
+Homotopy categories can be triangulated.
 \begin{proposition}
     Let $T{({X}^{*})}^{p}={X}^{p+1}$ and ${d}_{T(X)}=-{d}_{X}$. Given a morphism $u:{X}^{*}\to{Y}^{*}$, we define ${Z}^{*}$ to be the \hdef{mapping cone} $T({X}^{*})\oplus{Y}^{*}$. The differential maps in ${Z}^{*}$ are matrices $\begin{pmatrix}
         T({d}_{X}) & T(u) \\
@@ -172,22 +176,95 @@ Homotopy category can be triangulated.
         \item $Q(s)$ is an isomorphism for every $s\in S$.
         \item Any functor $F:\cat{C}\to\cat{D}$ such that $F(s)$ is an isomorphism for all $s\in S$ factors uniquely through $Q$.
     \end{enumerate}
+    If $Q':\cat{C}\to{\cat{C}}_{\cat{S}}$ is another functor satisfies these properties, then the two localizations are considered to be equivalent. 
 \end{definition}
-\begin{center}
-    \begin{tikzcd}
-        {\cat{C}} && {{\cat{C}}_{\cat{S}}} \\
-        \\
-        && {\cat{D}}
-        \arrow["Q", from=1-1, to=1-3]
-        \arrow["F"', from=1-1, to=3-3]
-        \arrow["{\wb{F}}", dashed, from=1-3, to=3-3]
-    \end{tikzcd}
-\end{center}
 \begin{definition}
     Let $\cat{A}$ be an abelian category. A \hdef{quasi-isomorphism} is a morphism $f:{X}^{*}\to{Y}^{*}$ in $\cat{K(A)}$ which induces an isomorphism on cohomology. The collection of all quasi-isomorphisms is denoted by $\text{Qis}$.
 \end{definition}
 \begin{definition}
     The \hdef{derived category} $\cat{D(A)}$ of an abelian category $\cat{A}$ is the localization ${\cat{K(A)}}_{\cat{Qis}}$.
 \end{definition}
+\begin{proposition}
+    Given an abelian category $\cat{A}$, there exists a derived category $\cat{D(A)}$. 
+\end{proposition}
+\begin{proof}
+    Consider the generalization: any localization ${\cat{C}}_{\cat{S}}$ exists. Let $\Ob({\cat{C}}_{\cat{S}})=\Ob(\cat{C})$ and let $Q$ be the identity on objects. For all $s\in S$, introduce some variable ${x}_{s}$, then construct an oriented graph $\Ga$ as follows: let the vertices be objects in $\cat{C}$, let the edges be morphisms in $\cat{C}$ union $\{{x}_{s}\}$, the edge has the direction $X\to Y$ if there exists a morphism $X\to Y$ in $\cat{C}$, and the edge ${x}_{s}$ has the same vertices as the edges but the opposite orientation. Define a morphism to be an equivalence class of paths that share the same initial and terminal in $\Ga$. Two paths are equivalent if they can be joined by a chain of elementary equivalences that two consecutive arrows in a path can be replaced by their composition and  arrows $X\xrightarrow{s}Y\xrightarrow{{s}_{x}}X$ can be replaced by $X\xrightarrow{{\id}_{X}}X$. The composition of morphisms is induced by the conjunction of paths. The functor $Q$ takes a morphism to a corresponding path of length 1. The inverse of a morphism $s\in S$ is ${x}_{s}$. Suppose we have another functor $\cat{C}\to\cat{C}'$ satisfies the universal property. We construct $G:{\cat{C}}_{\cat{S}}\to\cat{C}'$ by $G(X)=F(X)$, $G(f)=F(f)$, and $G(({x}_{s}))=\inv{F(s)}$ for all $X\in\Ob(\cat{C})$, $f\in{\Mor}_{\cat{A}}$, and $s\in S$. This defines a localization but we will not check the axioms here.
+\end{proof}
+\par
+Let $s\in S$ and let $f:X'\to Y$ be a morphism in $\cat{A}$. A \hdef{roof} is a diagram $(s,f)$ of the form 
+\begin{center}
+    \begin{tikzcd}
+        & {X'} \\
+        X && Y
+        \arrow["s"', from=1-2, to=2-1]
+        \arrow["f", from=1-2, to=2-3]
+    \end{tikzcd}
+\end{center}
+The morphisms in ${\cat{C}}_{\cat{S}}$ are equivalence classes of roofs. One could check this is exactly the same as we described in the previous proposition.
+\begin{proposition}
+    Derived categories are additive.
+\end{proposition}
+\begin{proof}
+    Let $\vp,\vp':X\to Y$ be morphisms in $\cat{D(A)}$. 
+    \begin{center}
+        \begin{tikzcd}
+            & U \\
+            X && Y
+            \arrow["t"', from=1-2, to=2-1]
+            \arrow["g", from=1-2, to=2-3]
+        \end{tikzcd}
+        \hspace{2.5cm}
+        \begin{tikzcd}
+            & {U'} \\
+            X && Y
+            \arrow["{t'}"', from=1-2, to=2-1]
+            \arrow["{g'}", from=1-2, to=2-3]
+        \end{tikzcd}
+    \end{center}
+    Since $t$ and $t'$ are quasi-isomorphisms, we can construct $V$ by homotopy pullback such that the following diagram commutes up to homotopy. We define the addition $\vp+\vp'$ to be the equivalence class of roofs of the form below.
+    \begin{center}
+        \begin{tikzcd}
+            V && {U'} \\
+            \\
+            U && X
+            \arrow["{q'}", from=1-1, to=1-3]
+            \arrow["q"', from=1-1, to=3-1]
+            \arrow["{t'}", from=1-3, to=3-3]
+            \arrow["t"', from=3-1, to=3-3]
+        \end{tikzcd}
+        \hspace{2.5cm}
+        \begin{tikzcd}
+            & V \\
+            X && Y
+            \arrow["{t\comp q}"', from=1-2, to=2-1]
+            \arrow["{g\comp q+g'\comp q'}", from=1-2, to=2-3]
+        \end{tikzcd}
+    \end{center}
+    It is left to check that addition does define an additive structure, but we will skip the details.
+\end{proof}
+\begin{definition}
+    Let $\cat{C}$ be a triangulated category. A collection $S$ of morphisms in $\cat{C}$ is said to be \hdef{compatible with triangulation} if 
+    \begin{enumerate}
+        \item $s\in S$ if and only if $T(s)\in S$.
+        \item consider the diagram (TR3), if $f,g\in S$, then the complementing morphism $h\in S$.
+    \end{enumerate}
+\end{definition}
+\par
+Derived categories can be triangulated. Let $\cat{C}$ be a triangulated category and consider some localization ${\cat{C}}_{\cat{S}}$ that is compatible with triangulation. Define $T$ to be the localizing functor and define $\Ob({\cat{C}}_{\cat{S}})=\Ob(\cat{C})$. A triangle in ${\cat{C}}_{\cat{S}}$ is a image of a triangle in $\cat{C}$ under the localization $\cat{C}\to{\cat{C}}_{\cat{S}}$. This defines a triangulated category. See [Gel03] IV.2 for a detailed proof. It is not hard to check that $\text{Qis}$ is compatible with $\cat{K(A)}$, hence $\cat{D(A)}$ is triangulated.
+\begin{definition}
+    Let $\cat{A}$ be an abelian category and let ${\cat{K}}^{\cat{*}}(\cat{A})$ be a triangulated subcategory of $\cat{K(A)}$. If the natural functor ${{\cat{K}}^{\cat{*}}\cat{(A)}}_{{\cat{K}}^{\cat{*}}\cat{(A)}\cap\cat{Qis}}\to\cat{D(A)}$ is fully-faithful, then ${\cat{D}}^{\cat{*}}\cat{(A)}$ is called a \hdef{localizing subcategory} and we denote it by ${\cat{D}}^{\cat{*}}\cat{(A)}$. 
+\end{definition}
 \par
 We show the definition of a right derived covariant functor and the other definitions can be obtained similarly.
+\begin{definition}
+    Let $\cat{A}$ and $\cat{B}$ be abelian categories. Let $F:{\cat{K}}^{\cat{*}}\cat{(A)}\to\cat{K(B)}$ be a $\pa$-functor. The \hdef{right derived covariant functor} of $F$ is a $\pa$-functor ${R}^{*}F:{\cat{D}}^{\cat{*}}\cat{(A)}\to\cat{D(B)}$ together with a natural transformation $\eta:Q\comp F\to{R}^{*}F\comp Q$ from ${\cat{K}}^{\cat{*}}\cat{(A)}\to\cat{D(B)}$ such that if $G:{\cat{D}}^{\cat{*}}\cat{(A)}\to\cat{D(B)}$ is a $\pa$-functor and $\xi:Q\comp F\to G\comp Q$ is a natural transformation, then there exists unique natural transformation $\eta':{R}^{*}F\to G$ such that $\xi=(\eta'\comp Q)\comp\eta$.
+\end{definition}
+\vspace{\baselineskip}
+\begin{center}
+    \large\bfseries References\normalsize
+\end{center}
+[Gel03] Gelfand, S. I. and Manin, Yu. I. \textit{Methods of Homological Algebra}. 2nd ed. Springer-Verlag New York, 2003.
+\newline
+[Har66] Hartshorne, R. \textit{Residues and Duality}. 1st ed. Springer-Verlag New York. 1966.
+\newline
+[Huy09] Huybrechts, D. \textit{Fourier-Mukai Transforms in Algebraic Geometry}. 1st ed. Oxford, Clarendon. 2009.
