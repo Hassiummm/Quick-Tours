@@ -178,6 +178,12 @@ Homotopy categories can be triangulated.
     \end{enumerate}
     If $Q':\cat{C}\to{\cat{C}}_{\cat{S}}$ is another functor satisfies these properties, then the two localizations are considered to be equivalent. 
 \end{definition}
+\begin{proposition}
+    The localization ${\cat{C}}_{\cat{S}}$ exists.
+\end{proposition}
+\begin{proof}
+    Let $\Ob({\cat{C}}_{\cat{S}})=\Ob(\cat{C})$ and let $Q$ be the identity on objects. For all $s\in S$, introduce some variable ${x}_{s}$, then construct an oriented graph $\Ga$ as follows: let the vertices be objects in $\cat{C}$, let the edges be morphisms in $\cat{C}$ union $\{{x}_{s}\}$, the edge has the direction $X\to Y$ if there exists a morphism $X\to Y$ in $\cat{C}$, and the edge ${x}_{s}$ has the same vertices as the edges but the opposite orientation. Define a morphism to be an equivalence class of paths that share the same initial and terminal in $\Ga$. Two paths are equivalent if they can be joined by a chain of elementary equivalences that two consecutive arrows in a path can be replaced by their composition and  arrows $X\xrightarrow{s}Y\xrightarrow{{s}_{x}}X$ can be replaced by $X\xrightarrow{{\id}_{X}}X$. The composition of morphisms is induced by the conjunction of paths. The functor $Q$ takes a morphism to a corresponding path of length 1. The inverse of a morphism $s\in S$ is ${x}_{s}$. Suppose we have another functor $\cat{C}\to\cat{C}'$ satisfies the universal property. We construct $G:{\cat{C}}_{\cat{S}}\to\cat{C}'$ by $G(X)=F(X)$, $G(f)=F(f)$, and $G(({x}_{s}))=\inv{F(s)}$ for all $X\in\Ob(\cat{C})$, $f\in{\Mor}_{\cat{A}}$, and $s\in S$. This defines a localization but we will not check the axioms here.
+\end{proof}
 \begin{definition}
     Let $\cat{A}$ be an abelian category. A \hdef{quasi-isomorphism} is a morphism $f:{X}^{*}\to{Y}^{*}$ in $\cat{K(A)}$ which induces an isomorphism on cohomology. The collection of all quasi-isomorphisms is denoted by $\text{Qis}$.
 \end{definition}
@@ -188,7 +194,7 @@ Homotopy categories can be triangulated.
     Given an abelian category $\cat{A}$, there exists a derived category $\cat{D(A)}$. 
 \end{proposition}
 \begin{proof}
-    Consider the generalization: any localization ${\cat{C}}_{\cat{S}}$ exists. Let $\Ob({\cat{C}}_{\cat{S}})=\Ob(\cat{C})$ and let $Q$ be the identity on objects. For all $s\in S$, introduce some variable ${x}_{s}$, then construct an oriented graph $\Ga$ as follows: let the vertices be objects in $\cat{C}$, let the edges be morphisms in $\cat{C}$ union $\{{x}_{s}\}$, the edge has the direction $X\to Y$ if there exists a morphism $X\to Y$ in $\cat{C}$, and the edge ${x}_{s}$ has the same vertices as the edges but the opposite orientation. Define a morphism to be an equivalence class of paths that share the same initial and terminal in $\Ga$. Two paths are equivalent if they can be joined by a chain of elementary equivalences that two consecutive arrows in a path can be replaced by their composition and  arrows $X\xrightarrow{s}Y\xrightarrow{{s}_{x}}X$ can be replaced by $X\xrightarrow{{\id}_{X}}X$. The composition of morphisms is induced by the conjunction of paths. The functor $Q$ takes a morphism to a corresponding path of length 1. The inverse of a morphism $s\in S$ is ${x}_{s}$. Suppose we have another functor $\cat{C}\to\cat{C}'$ satisfies the universal property. We construct $G:{\cat{C}}_{\cat{S}}\to\cat{C}'$ by $G(X)=F(X)$, $G(f)=F(f)$, and $G(({x}_{s}))=\inv{F(s)}$ for all $X\in\Ob(\cat{C})$, $f\in{\Mor}_{\cat{A}}$, and $s\in S$. This defines a localization but we will not check the axioms here.
+     
 \end{proof}
 \par
 Let $s\in S$ and let $f:X'\to Y$ be a morphism in $\cat{A}$. A \hdef{roof} is a diagram $(s,f)$ of the form 
