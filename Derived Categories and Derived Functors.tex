@@ -1,7 +1,7 @@
 \pagebreak
 \section{Derived Categories}
 \par
-In this note, we will sketch some proofs but not in detailed.
+This note is based on my presentation given in Math 501.
 \begin{definition}
     Let $\cat{C}$ be a category. A category $\cat{D}$ is a \hdef{subcategory} of $\cat{C}$ if the $\Ob(\cat{D})$ and the ${\Hom}_{\cat{D}}(X,Y)$ are subcollections of $\Ob(\cat{C})$ and ${\Hom}_{\cat{C}}(X,Y)$, respectively, for all objects $X$ and $Y$ in $\cat{C}$. The subcatgeory $\cat{D}$ is said to be \hdef{full} if for all objects $X$ and $Y$ in $\cat{D}$, ${\Hom}_{\cat{D}}(X,Y)$ is exactly ${\Hom}_{\cat{C}}(X,Y)$.
 \end{definition}
@@ -9,29 +9,13 @@ In this note, we will sketch some proofs but not in detailed.
     Let $\cft{C}$ be a category. A morphism $f:A\to B$ is a \hdef{monomorphism} if for all $g,h:C\to A$, $f\comp g=f\comp h$ implies $g=h$. A morphism $f:A\to B$ is called an \hdef{epimorphism} if for all $i,j:B\to D$, $i\comp f=j\comp f$ implies $i=j$.
 \end{definition}
 \begin{definition}
-    Let $\cat{C}$ be a category. A morphism $f:X\to Y$ in $\cat{C}$ is a \hdef{constant morphism} if for all object $Z$ and morphisms $g,h:Z\to X$, $fg=fh$. A morphism is a \hdef{zero morphism} if it is both a constant morphism and a coconstant morphism.
+    An \hdef{initial object} $0$ of a category $\cft{C}$ is an object in $\cft{C}$ such that for any object $A$, there is a unique morphism $0\to A$. A \hdef{terminal object} $1$ of a category $\cft{C}$ is an object of $\cft{C}$ such that for any object $B$, there is a unique morphism $A\to 1$. We say an object is the \hdef{zero object} if it is both an initial object and a terminal object.
 \end{definition}
 \begin{definition}
-    Let $\cat{C}$ be a category. A \hdef{kernel} of a morphism $f:X\to Y$ is a pair $(K,k)$, where $K$ is an object and $k:K\to X$ is a morphism, such that 
-    \begin{enumerate}
-        \item $fk={0}_{KY}$.
-        \item For all $(K',k')$ such that $k'f={0}_{K'Y}$, there exists a unique $u:K'\to K$.
-    \end{enumerate}
-    \begin{center}
-        \begin{tikzcd}
-            && X \\
-            \\
-            && K && Y \\
-            \\
-            {K'}
-            \arrow["f", from=1-3, to=3-5]
-            \arrow["k", from=3-3, to=1-3]
-            \arrow["0"', from=3-3, to=3-5]
-            \arrow["{k'}", from=5-1, to=1-3]
-            \arrow["u", dashed, from=5-1, to=3-3]
-            \arrow["0"', from=5-1, to=3-5]
-        \end{tikzcd}
-    \end{center}
+    Let $\cat{C}$ be a category with zero object 0. The \hdef{zero morphism} ${0}_{A,B}$ between objects $A$ and $B$ is the unique morphism that factors through 0.
+\end{definition}
+\begin{definition}
+    Let $\cat{C}$ be an object and let $f:X\to Y$ be a morphism in $\cat{C}$. An object $\ker(f)$ is said to be the \hdef{kernel} of $f$ if for every object $Z$ and $h:Z\to X$ such that $f\comp g=0$, where $0$ is the zero morphism, there is a unique morphism $\vp:Z\to\ker(f)$ such that $h=p\comp\vp$.
 \end{definition}
 \begin{definition}
     Let $F$ and $G$ be functors between $\cat{C}$ and $\cat{D}$. A \hdef{natural transformation} $\eta$ from $F$ to $G$ is a family of morphisms such that
@@ -39,10 +23,16 @@ In this note, we will sketch some proofs but not in detailed.
         \item For all object $X$ in $\cat{C}$, there exists a morphism ${\eta}_{X}:F(X)\to G(X)$, called the \hdef{component} at $X$.
         \item For all $f:X\to Y$, ${\eta}_{Y}\comp F(f)=G(f)\comp{\eta}_{X}$.
     \end{enumerate}
-    A functor $F:\cat{C}\to\cat{D}$ is a \hdef{natural functor} if for all $G:\cat{C}\to\cat{D}$, there exists a natueal transformation $\eta$.
+    A functor $F:\cat{C}\to\cat{D}$ is a \hdef{natural functor} if for all $G:\cat{C}\to\cat{D}$, there exists a natueal transformation $\eta:F\to G$.
 \end{definition}
 \begin{definition}
-    A category $\cat{C}$ is an \hdef{additive category} if every hom-set of $\cat{C}$ is an abelian group, composition of morphisms is bilinear, and $\cat{C}$ admits finite coproduct.
+    A category $\cat{C}$ is an \hdef{additive category} if the following properties hold.
+    \begin{enumerate}
+        \item $\cat{C}$ has an zero object $0$.
+        \item Every hom-set of $\cat{C}$ is an abelian group.
+        \item Composition of morphisms is bilinear.
+        \item $\cat{C}$ admits finite coproduct.
+    \end{enumerate}
 \end{definition}
 \begin{definition}
     A functor $f:\cat{A}\to\cat{B}$ between additive categories is an \hdef{additive functor} if it preserves the finite coproduct.
@@ -109,7 +99,7 @@ Let $\cat{A}$ be an additive category and $\cat{K(A)}$ be the homotopy category.
                 \arrow[from=3-5, to=3-7]
             \end{tikzcd}
         \end{center}
-        \item Let $(X,Y,Z',u,j,\ )$, $(Y,Z,X',v,\ ,i)$, and $(X,Z,Y',vu,\ ,\ )$ be triangles, then there exists morphisms $f:Z'\to Y'$ and $g:Y'\to X'$ such that $(Z',Y',X',f,g,T(j)i)$ is a triangle and the following diagram commutes.
+        \item Let $(X,Y,Z',u,j,-)$, $(Y,Z,X',v,-,i)$, and $(X,Z,Y',vu,-,-)$ be triangles, then there exists morphisms $f:Z'\to Y'$ and $g:Y'\to X'$ such that $(Z',Y',X',f,g,T(j)i)$ is a triangle and the following diagram commutes.
         \begin{center}
             \begin{tikzcd}
                 {Z'} && {Y'} \\
@@ -159,16 +149,39 @@ Let $\cat{A}$ be an additive category and $\cat{K(A)}$ be the homotopy category.
 \par
 Homotopy categories can be triangulated.
 \begin{proposition}
-    Let $T{({X}^{*})}^{p}={X}^{p+1}$ and ${d}_{T(X)}=-{d}_{X}$. Given a morphism $u:{X}^{*}\to{Y}^{*}$, we define ${Z}^{*}$ to be the \hdef{mapping cone} $T({X}^{*})\oplus{Y}^{*}$. The differential maps in ${Z}^{*}$ are matrices $\begin{pmatrix}
+    Let $T{(X)}^{p}={X}^{p+1}$ and ${d}_{T(X)}=-{d}_{X}$. Given a morphism $u:X\to Y$, we define $Z$ to be the \hdef{mapping cone} $T(X)\op Y$. The differential maps in $Z$ are matrices $\begin{pmatrix}
         T({d}_{X}) & T(u) \\
         0 & {d}_{Y}
-    \end{pmatrix}$. We pick $v:{Y}^{*}\to{Z}^{*}$ and $w:{Z}^{*}\to{X}^{*}$ to be the natural inclusion and projection. A triangle is defined to be a sextuple that induces by a morphism $u:{X}^{*}\to{Y}^{*}$. This defines a triangulated category.
+    \end{pmatrix}$. We pick $v:Y\to Z$ and $w:Z\to X$ to be the natural inclusion and projection. A triangle is defined to be a sextuple that induces by a morphism $u:X\to Y$. This defines a triangulated category.
 \end{proposition}
 \begin{proof}
-    (TR1) Take ${\id}_{X}:{X}^{*}\to{X}^{*}$, then ${Z}^{*}=T({X}^{*})\oplus{X}^{*}$ and the differentials are ${d}_{Z}^{n}=\begin{pmatrix}
+    (TR1) Take ${\id}_{X}:X\to X$, then $Z=T(X)\op X$ and the differentials are ${d}_{Z}^{n}=\begin{pmatrix}
         -{d}_{X}^{n} & {\id}_{{X}^{n+1}} \\
         0 & {d}_{X}^{n}
-    \end{pmatrix}$. Define ${k}^{n}:{Z}^{n}\to{Z}^{n-1}$ by ${k}^{n}((a,b))=(0,a)$. Then ${k}^{n+1}{d}_{Z}^{n}((a,b))={k}^{n+1}((-{d}_{X}^{n}(a)+b,{d}_{X}^{n}(b)))=(0,-{d}_{X}^{n}(a)+b)$ and ${d}_{Z}^{n-1}{k}^{n}((a,b))={d}_{Z}^{n-1}((0,a))=(a,{d}_{X}^{n}(a))$. We have $({k}^{n+1}{d}_{Z}^{n}+{d}_{Z}^{n-1}{k}^{n})((a,b))=(a,b)$, hence ${\id}_{\Z}\sim 0$. The sextuple $(X,X,0,{\id}_{X},0,0)$ is the triangle induced by ${\id}_{X}:{X}^{*}\to{X}^{*}$. $\sq$ (TR2) Let $({X}^{*},{Y}^{*},{Z}^{*},u,v,w)$ be a triangle. Denote $T({Y}^{*})\op{Z}^{*}$ by ${A}^{*}$. Consider the sextuple $({Y}^{*},{Z}^{*},{A}^{*},v,s,t)$, 
+    \end{pmatrix}$. Define ${k}^{n}:{Z}^{n}\to{Z}^{n-1}$ by ${k}^{n}((a,b))=(0,a)$. We have $({k}^{n+1}{d}_{Z}^{n}+{d}_{Z}^{n-1}{k}^{n})((a,b))=(a,b)$, hence ${\id}_{\Z}\sim 0$. The sextuple $(X,X,0,{\id}_{X},0,0)$ is the triangle induced by ${\id}_{X}:X\to X$. $\sq$ (TR2) Let $(X,Y,Z,u,v,w)$ be a triangle. Denote $T(Y)\op Z$ by $A$. Consider the sextuple $(Y,Z,A,v,s,t)$. Notice that ${(T(X))}^{i}={X}^{i+1}$, so we pick ${x}^{i+1}\in{(T(X))}^{i}$. Define ${\theta}^{i}:{(T(X))}^{i}\to{A}^{i}$ by ${x}^{i+1}\mt(-{u}^{i+1}({x}^{i+1}),{x}^{i+1},0)$.
+    \begin{center}
+        \begin{tikzcd}
+            Y && {T(X)\op Y} && {T(X)} && {T(Y)} \\
+            \\
+            Y && {T(X)\op Y} && {T(Y)\op T(X)\op Y} && {T(Y)}
+            \arrow["v", from=1-1, to=1-3]
+            \arrow["{{\id}_{Y}}"', from=1-1, to=3-1]
+            \arrow["w", from=1-3, to=1-5]
+            \arrow["{{\id}_{T(X)\op Y}}"', from=1-3, to=3-3]
+            \arrow["{T(v)}", from=1-5, to=1-7]
+            \arrow["\theta"', from=1-5, to=3-5]
+            \arrow["{{\id}_{T(Y)}}"', from=1-7, to=3-7]
+            \arrow["v"', from=3-1, to=3-3]
+            \arrow[from=3-3, to=3-5]
+            \arrow[from=3-5, to=3-7]
+        \end{tikzcd}
+    \end{center}
+    Define ${h}^{i}:{Z}^{i}\to{A}^{i-1}$ by ${h}^{i}({x}^{i+1},{y}^{i})=({y}^{i},0,0)$. Then two maps from $Z$ to $A$ are homotopic. Let $\psi:A\to T(X)$ be the natural projection, then $\psi\comp\theta={\id}_{T(X)}$. We have ${\theta\comp\psi}^{i}:{A}^{i}\to{A}^{i}$ with ${\theta\comp\psi}^{i}:({y}^{i+1},{x}^{i+1},{y}^{i})\mt(-{f}^{i+1}({x}^{i+1}),{x}^{i+1},0)$. Pick ${k}^{i}:{A}^{i}\to{A}^{i-1}$ to be the map $({y}^{i+1},{x}^{i+1},{y}^{i})\mt({y}^{i},0,0)$, then $\theta\comp\psi\sim{\id}_{A}$. $\sq$ (TR3) We have $Z=T(X)\op Y$ and $Z'=T(X')\op Y'$, so the complementing morphism is exactly $h=T(f)\op g:Z\to Z'$. $\sq$ (TR4) We say an exact sequence of complexes $0\to X\xrightarrow{u}Y\xrightarrow{v}Z\to 0$ is \hdef{semi-split} if for all $i$, there exists a morphism ${w}^{i}:{Z}^{i}\to{Y}^{i}$ such that ${v}^{i}{w}^{i}={\id}_{{Z}^{i}}$. Consider a lemma: any semi-split exact sequence in $\cat{C(A)}$ can induce a triangle $(X,Y,Z,u,v,-)$ in $\cat{K(A)}$. (lemma) 
+
+    Now given the upper cap, we want to construct the lower cap by this lemma.
+    \begin{center}
+        
+    \end{center}
 \end{proof}
 \begin{definition}
     Let $\cat{C}$ be a category and let $S$ be a collection of morphisms in $\cat{C}$, then the \hdef{localization} of $\cat{C}$ with respect to $S$ is a category ${\cat{C}}_{\cat{S}}$ together with a functor $Q:\cat{C}\to{\cat{C}}_{\cat{S}}$ such that 
@@ -182,7 +195,7 @@ Homotopy categories can be triangulated.
     The localization ${\cat{C}}_{\cat{S}}$ exists.
 \end{proposition}
 \begin{proof}
-    Let $\Ob({\cat{C}}_{\cat{S}})=\Ob(\cat{C})$ and let $Q$ be the identity on objects. For all $s\in S$, introduce some variable ${x}_{s}$, then construct an oriented graph $\Ga$ as follows: let the vertices be objects in $\cat{C}$, let the edges be morphisms in $\cat{C}$ union $\{{x}_{s}\}$, the edge has the direction $X\to Y$ if there exists a morphism $X\to Y$ in $\cat{C}$, and the edge ${x}_{s}$ has the same vertices as the edges but the opposite orientation. Define a morphism to be an equivalence class of paths that share the same initial and terminal in $\Ga$. Two paths are equivalent if they can be joined by a chain of elementary equivalences that two consecutive arrows in a path can be replaced by their composition and  arrows $X\xrightarrow{s}Y\xrightarrow{{s}_{x}}X$ can be replaced by $X\xrightarrow{{\id}_{X}}X$. The composition of morphisms is induced by the conjunction of paths. The functor $Q$ takes a morphism to a corresponding path of length 1. The inverse of a morphism $s\in S$ is ${x}_{s}$. Suppose we have another functor $\cat{C}\to\cat{C}'$ satisfies the universal property. We construct $G:{\cat{C}}_{\cat{S}}\to\cat{C}'$ by $G(X)=F(X)$, $G(f)=F(f)$, and $G(({x}_{s}))=\inv{F(s)}$ for all $X\in\Ob(\cat{C})$, $f\in{\Mor}_{\cat{A}}$, and $s\in S$. This defines a localization but we will not check the axioms here.
+    Let $\Ob({\cat{C}}_{\cat{S}})=\Ob(\cat{C})$ and let $Q$ be the identity on objects. For all $s\in S$, introduce some variable ${x}_{s}$, then construct an oriented graph $\Ga$ as follows: let the vertices be objects in $\cat{C}$, let the edges be morphisms in $\cat{C}$ union $\{{x}_{s}\}$, the edge has the direction $X\to Y$ if there exists a morphism $X\to Y$ in $\cat{C}$, and the edge ${x}_{s}$ has the same vertices as the edges but the opposite orientation. Define a morphism to be an equivalence class of paths that share the same initial and terminal in $\Ga$. Two paths are equivalent if they can be joined by a chain of elementary equivalences that two consecutive arrows in a path can be replaced by their composition and  arrows $X\xrightarrow{s}Y\xrightarrow{{s}_{x}}X$ can be replaced by $X\xrightarrow{{\id}_{X}}X$. The composition of morphisms is induced by the conjunction of paths. The functor $Q$ takes a morphism to a corresponding path of length 1. The inverse of a morphism $s\in S$ is ${x}_{s}$. 
 \end{proof}
 \begin{definition}
     Let $\cat{A}$ be an abelian category. A \hdef{quasi-isomorphism} is a morphism $f:{X}^{*}\to{Y}^{*}$ in $\cat{K(A)}$ which induces an isomorphism on cohomology. The collection of all quasi-isomorphisms is denoted by $\text{Qis}$.
@@ -191,7 +204,7 @@ Homotopy categories can be triangulated.
     The \hdef{derived category} $\cat{D(A)}$ of an abelian category $\cat{A}$ is the localization ${\cat{K(A)}}_{\cat{Qis}}$.
 \end{definition}
 \par
-Let $s\in S$ and let $f:X'\to Y$ be a morphism in $\cat{A}$. A \hdef{roof} is a diagram $(s,f)$ of the form 
+Let $s\in\text{Qis}$ and let $f:X'\to Y$ be a morphism in $\cat{A}$. A \hdef{roof} is a diagram $(s,f)$ of the form 
 \begin{center}
     \begin{tikzcd}
         & {X'} \\
@@ -200,7 +213,7 @@ Let $s\in S$ and let $f:X'\to Y$ be a morphism in $\cat{A}$. A \hdef{roof} is a 
         \arrow["f", from=1-2, to=2-3]
     \end{tikzcd}
 \end{center}
-The morphisms in ${\cat{C}}_{\cat{S}}$ are equivalence classes of roofs. One could check this is exactly the same as we described in the previous proposition.
+The morphisms in $\cat{D(A)}$ are equivalence classes of roofs. One could check this is exactly the same as we described in the previous proposition. For a proof, check [GM03] III.2.
 \begin{proposition}
     Derived categories are additive.
 \end{proposition}
@@ -221,7 +234,7 @@ The morphisms in ${\cat{C}}_{\cat{S}}$ are equivalence classes of roofs. One cou
             \arrow["{g'}", from=1-2, to=2-3]
         \end{tikzcd}
     \end{center}
-    Since $t$ and $t'$ are quasi-isomorphisms, we can construct $V$ by homotopy pullback such that the following diagram commutes up to homotopy. We define the addition $\vp+\vp'$ to be the equivalence class of roofs of the form below.
+    We want the roofs to have common top and left side. Since $t$ and $t'$ are quasi-isomorphisms, we can construct $V$ by homotopy pullback such that the following diagram commutes up to homotopy. We define the addition $\vp+\vp'$ to be the equivalence class of roofs of the form below.
     \begin{center}
         \begin{tikzcd}
             V && {U'} \\
@@ -240,17 +253,22 @@ The morphisms in ${\cat{C}}_{\cat{S}}$ are equivalence classes of roofs. One cou
             \arrow["{g\comp q+g'\comp q'}", from=1-2, to=2-3]
         \end{tikzcd}
     \end{center}
-    It is left to check that addition does define an additive structure, but we will skip the details.
+    This defines an additive category.
 \end{proof}
 \begin{definition}
-    Let $\cat{C}$ be a triangulated category. A collection $S$ of morphisms in $\cat{C}$ is said to be \hdef{compatible with triangulation} if 
+    Let $\cat{C}$ be a triangulated category. A collection $S$ of morphisms in $\cat{C}$ is said to be \hdef{compatible with triangulation} if it satisfies the following property.
     \begin{enumerate}
         \item $s\in S$ if and only if $T(s)\in S$.
         \item consider the diagram (TR3), if $f,g\in S$, then the complementing morphism $h\in S$.
     \end{enumerate}
 \end{definition}
 \par
-Derived categories can be triangulated. Let $\cat{C}$ be a triangulated category and consider some localization ${\cat{C}}_{\cat{S}}$ that is compatible with triangulation. Define $T$ to be the localizing functor and define $\Ob({\cat{C}}_{\cat{S}})=\Ob(\cat{C})$. A triangle in ${\cat{C}}_{\cat{S}}$ is a image of a triangle in $\cat{C}$ under the localization $\cat{C}\to{\cat{C}}_{\cat{S}}$. This defines a triangulated category. See [Gel03] IV.2 for a detailed proof. It is not hard to check that $\text{Qis}$ is compatible with $\cat{K(A)}$, hence $\cat{D(A)}$ is triangulated.
+Derived categories can be triangulated. 
+\begin{proposition}
+    Let $\cat{C}$ be a triangulated category and consider some localization ${\cat{C}}_{\cat{S}}$ that is compatible with triangulation. Define $T$ to be the localizing functor and define $\Ob({\cat{C}}_{\cat{S}})=\Ob(\cat{C})$. A triangle in ${\cat{C}}_{\cat{S}}$ is a image of a triangle in $\cat{C}$ under the localization $\cat{C}\to{\cat{C}}_{\cat{S}}$. This defines a triangulated category.
+\end{proposition}
+\par
+It is not hard to check that $\text{Qis}$ is compatible with $\cat{K(A)}$, hence $\cat{D(A)}$ is triangulated.
 \begin{definition}
     Let $\cat{A}$ be an abelian category and let ${\cat{K}}^{\cat{*}}(\cat{A})$ be a triangulated subcategory of $\cat{K(A)}$. If the natural functor ${{\cat{K}}^{\cat{*}}\cat{(A)}}_{{\cat{K}}^{\cat{*}}\cat{(A)}\cap\cat{Qis}}\to\cat{D(A)}$ is fully-faithful, then ${\cat{D}}^{\cat{*}}\cat{(A)}$ is called a \hdef{localizing subcategory} and we denote it by ${\cat{D}}^{\cat{*}}\cat{(A)}$. 
 \end{definition}
@@ -263,7 +281,7 @@ We show the definition of a right derived covariant functor and the other defini
 \begin{center}
     \large\bfseries References\normalsize
 \end{center}
-[Gel03] Gelfand, S. I. and Manin, Yu. I. \textit{Methods of Homological Algebra}. 2nd ed. Springer-Verlag New York, 2003.
+[GM03] Gelfand, S. I. and Manin, Yu. I. \textit{Methods of Homological Algebra}. 2nd ed. Springer-Verlag New York. 2003.
 \newline
 [Har66] Hartshorne, R. \textit{Residues and Duality}. 1st ed. Springer-Verlag New York. 1966.
 \newline
