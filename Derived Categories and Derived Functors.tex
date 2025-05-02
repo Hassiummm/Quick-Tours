@@ -6,7 +6,7 @@ In this note, we will sketch some proofs but not in detailed.
     Let $\cat{C}$ be a category. A category $\cat{D}$ is a \hdef{subcategory} of $\cat{C}$ if the $\Ob(\cat{D})$ and the ${\Hom}_{\cat{D}}(X,Y)$ are subcollections of $\Ob(\cat{C})$ and ${\Hom}_{\cat{C}}(X,Y)$, respectively, for all objects $X$ and $Y$ in $\cat{C}$. The subcatgeory $\cat{D}$ is said to be \hdef{full} if for all objects $X$ and $Y$ in $\cat{D}$, ${\Hom}_{\cat{D}}(X,Y)$ is exactly ${\Hom}_{\cat{C}}(X,Y)$.
 \end{definition}
 \begin{definition}
-    Let $\cft{C}$ be a category. A morphism $f:A\to B$ is a \hdef{monomorphism} if for all $g,h:C\to A$, $f\comp g=g\comp h$ implies $g=h$. A morphism $f:A\to B$ is called an \hdef{epimorphism} if for all $i,j:B\to D$, $i\comp f=j\comp f$ implies $i=j$.
+    Let $\cft{C}$ be a category. A morphism $f:A\to B$ is a \hdef{monomorphism} if for all $g,h:C\to A$, $f\comp g=f\comp h$ implies $g=h$. A morphism $f:A\to B$ is called an \hdef{epimorphism} if for all $i,j:B\to D$, $i\comp f=j\comp f$ implies $i=j$.
 \end{definition}
 \begin{definition}
     Let $\cat{C}$ be a category. A morphism $f:X\to Y$ in $\cat{C}$ is a \hdef{constant morphism} if for all object $Z$ and morphisms $g,h:Z\to X$, $fg=fh$. A morphism is a \hdef{zero morphism} if it is both a constant morphism and a coconstant morphism.
@@ -190,12 +190,6 @@ Homotopy categories can be triangulated.
 \begin{definition}
     The \hdef{derived category} $\cat{D(A)}$ of an abelian category $\cat{A}$ is the localization ${\cat{K(A)}}_{\cat{Qis}}$.
 \end{definition}
-\begin{proposition}
-    Given an abelian category $\cat{A}$, there exists a derived category $\cat{D(A)}$. 
-\end{proposition}
-\begin{proof}
-     
-\end{proof}
 \par
 Let $s\in S$ and let $f:X'\to Y$ be a morphism in $\cat{A}$. A \hdef{roof} is a diagram $(s,f)$ of the form 
 \begin{center}
