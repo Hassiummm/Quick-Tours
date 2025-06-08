@@ -1,11 +1,14 @@
 \section{Burnside Group of Odd Exponents: Results by Arkarskaya, A. et al.}
 \par
-This note is entirely based on [1] and I will only rephrase the proofs to make them more readable.
+The constructions and proofs are entirely based on [1] and I will rephrase the proofs to make them more readable.
 \begin{definition}
     Let $F=\cyc{{x}_{1},\dots,{x}_{m}}$ be the free group ${F}_{m}$, where $m\ge 2$. The \hdef{free Burnside group} $B(m,n)=F/\cyc{\cyc{{x}_{1},\dots,{x}_{m}\mid{w}^{n},w\in F}}$. We say $B(m,n)$ has \hdef{rank} $m$ and \hdef{exponent} $n$.
 \end{definition}
 \begin{definition}
     Let ${F}_{m}$ be a free group of rank $m$, then elements of $\{{x}_{1},\dots,{x}_{m}\}\cup\{\inv{{x}_{1}},\dots,\inv{{x}_{m}}\}$ are called \hdef{letters}. A sequence of words is called a \hdef{word}. A word without cancellation is called a \hdef{reduced word}. The \hdef{length} of $w$, denoted $\card{w}$, is the number of letters in $w$.
+\end{definition}
+\begin{definition}
+    A word $A$ is said to be \hdef{cyclically reduced} if any cyclic shift of $A$ is reduced.
 \end{definition}
 \begin{definition}
     We say a word $A$ is \hdef{cyclically contained} in a word $w$ if $A$ is a subword of any cyclic shift of $w$.
@@ -17,27 +20,32 @@ This note is entirely based on [1] and I will only rephrase the proofs to make t
     Let $w$ be a reduced word. A \hdef{prefix} of $w$ is any intial segment of $w$. A \hdef{suffix} of $w$ is any final segement of $w$.
 \end{definition}
 \begin{definition}
-    Let $w$ be a non-empty reduced word. We say $w$ is \hdef{primitive} if there does not exist $k\ge 2$ such that $w={a}^{k}$.
+    Let $w$ be a non-empty reduced word. We say $w$ is \hdef{primitive} if there does not exist $k\ge 2$ such that $w={a}^{k}$ for all words $a$.
 \end{definition}
-\begin{definition}
-    Let ${\Rel}_{i}\sub\{{w}^{n}\mid w\ \text{primitive}\}$ be a set of words such that ${\Un}_{i\in I}{\Rel}_{i}=\{{w}^{n}\mid w\ \text{primitive}\}$ and ${\Rel}_{i}\cap{\Rel}_{j}=\es$. Let ${\Can}_{-1}$ be the set of all words and let ${\Can}_{-1}$ be the set of all reduced words.
-\end{definition}
-\newpage
+\begin{convention}
+    We fix a nesting constant $\tau=15$ for small cancellation.
+\end{convention}
+\begin{convention}
+    Let $A$ be a word and let ${\can}_{i}(A)$ be the \hdef{canonical form} of rank $i$.
 
 
-\begin{theorem}
-    Induct on $i$, then the following properties hold.
-    \begin{enumerate}
-        \item ${\Can}_{i}\sub{\Can}_{i-1}$;
-        \item if ${L}_{1}{A}^{\tau}{R}_{1},{L}_{2}{A}^{\tau}{R}_{2}\in{\Can}_{i}$ for some primitive $A$ and ${A}^{n}\notin$
-    \end{enumerate}
-\end{theorem}
+    Define ${\Can}_{-1}$ to be the set of all words in the alphabet $\{{x}_{1},\dots,{x}_{m}\}\cup\{\inv{{x}_{1}},\dots\inv{{x}_{m}}\}$. Define ${\Rel}_{0}$ to be the set $\{1\}$, where $1$ is the empty word. Define ${\can}_{i}(A)=$
+\end{convention}
+\begin{convention}
+    Let $A$ be a cyclically reduced word. We say $A$ is \hdef{cyclically canonical} of rank $i$ if there exists $w\in{\Can}_{i}$ such that 
 
-
-
-
+    The set of all cyclically cononical words of rank $i$ is denoted by ${\Cycl}_{i}$.
+\end{convention}
+\begin{convention}
+    Define ${\Rel}_{1}=\{{x}^{n}\mid\card{x}=1\ \text{and}\ {x}^{n}\in{\Cycl}_{0}\}$ and ${\Rel}_{2}=\{{x}^{n}\mid\card{x}>1,\ x\ \text{is primitive},\ {x}^{n}\in{\Cycl}_{1},\ \text{and for all}\ a\in{\Cycl}_{0}\sm\{1\},\ {a}^{\tau}\ \text{is not cyclically contained in}\ x\}$. Define ${\Rel}_{i}=\{{x}^{n}\mid x\ \text{is primitive},\ {x}^{n}\in{\Cycl}_{r-1},\ \}$.
+\end{convention}
 \par
-If the induction works, we will have the following results immediately.
+Here we inductively define each term. Given ${\Can}_{i-1}$, we can construct ${\Cycl}_{i}$ to obtain ${\Rel}_{i}$. Then for any word $A$, ``cancel'' each ${\can}_{i-1}(A)$ by ${\Rel}_{i}$, this gives us ${\can}_{i}(A)$ and ${\Can}_{i}=\{{\can}_{i}(A)\mid A\in{\Can}_{-1}\}$.
+
+
+
+
+
 \begin{theorem}
-    
+    The sets ${\Rel}_{i}$ are closed under cyclic shifts and inveses. The sets ${\Rel}_{i}$ are pairwise disjoint and ${\Rel}_{i}\sub\{{w}^{n}\mid w\in{F}_{m}\ \text{and}\ w\ \text{is primitive}\}$.
 \end{theorem}
